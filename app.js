@@ -17,7 +17,40 @@ app.post("/", function(req, res) {
   let firstName = req.body.fName;
   let lastName = req.body.lName;
   let email = req.body.email;
-  console.log(firstName, lastName, email);
+
+  let data = {
+    members: [
+      {
+      email_address: email,
+      status: "subscribed",
+      merge_fields: {
+        FNAME: firstName,
+        LNAME: lastName,
+      }
+    }
+    ]
+  };
+
+  let jsonData = JSON.stringify(data);
+
+  var options = {
+    url: "https://us20.api.mailchimp.com/3.0/lists/",
+    method: "POST",
+    headers: {
+      "Authorization": ""
+    },
+    body: jsonData
+  };
+
+  request(options, function(error, response, body) {
+
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(response.statusCode);
+    }
+
+  });
 });
 
 app.listen(3000, function() {
