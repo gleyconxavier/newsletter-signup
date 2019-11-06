@@ -14,7 +14,7 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/signup.html");
 });
 
-app.post("/post", function(req, res) {
+app.post("/failure", function(req, res) {
   res.redirect("/");
 });
 
